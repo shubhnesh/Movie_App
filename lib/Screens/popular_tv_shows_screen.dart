@@ -1,4 +1,5 @@
 import 'package:MovieApp/Screens/all_popular_tv_shows_screen.dart';
+import 'package:MovieApp/Screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:MovieApp/Models/tvShow_model.dart';
@@ -88,30 +89,62 @@ class _PopularTvShowsScreenState extends State<PopularTvShowsScreen> {
                     itemCount: shows.length,
                     itemBuilder: (context, index) {
                       final show = shows[index];
-                      return Container(
-                        width: 140,
-                        margin: const EdgeInsets.only(right: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://image.tmdb.org/t/p/w342${show.posterPath}',
-                                height: 200,
-                                width: 140,
-                                fit: BoxFit.cover,
-                              ),
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsScreen(model: show),
                             ),
-                            const SizedBox(height: 7),
-                            Text(
-                              show.title,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
+                          );
+                        },
+                        child: Container(
+                          width: 140,
+                          margin: const EdgeInsets.only(right: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  'https://image.tmdb.org/t/p/w342${show.posterPath}',
+                                  height: 200,
+                                  width: 140,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                        return Container(
+                                          height: 200,
+                                          width: 140,
+                                          color: Colors.grey[900],
+                                          child: const Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      },
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                        height: 200,
+                                        width: 140,
+                                        color: Colors.grey[800],
+                                        child: const Icon(Icons.broken_image),
+                                      ),
+                                ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 7),
+                              Text(
+                                show.title.isNotEmpty
+                                ? show.title
+                                    : 'No Title',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
