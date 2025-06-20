@@ -1,0 +1,38 @@
+name: MovieApp
+description: "A new Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  bottom_navy_bar: any
+  http: any
+  carousel_slider: any
+  flutter_spinkit: any
+  cached_network_image: any
+  auto_size_text: any
+  youtube_player_iframe: any
+  page_transition: any
+
+  cupertino_icons: ^1.0.8
+  tmdb_api:
+  google_fonts:
+  dartz: ^0.10.1
+  url_launcher: ^6.3.1
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+
+flutter:
+
+  uses-material-design: true
