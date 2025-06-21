@@ -1,6 +1,6 @@
 # Flutter MovieApp
 
-It is a clean and simple Flutter application that lets you browse movies and TV shows using data from the [TMDB API](https://www.themoviedb.org/documentation/api).
+It is a clean and simple Flutter application that lets you browse movies and TV shows using data from the [TMDB API](https://developer.themoviedb.org/docs/getting-started).
 
 This app is designed to give users a smooth and engaging experience while exploring:
 - Trending Movies
@@ -27,7 +27,7 @@ Each section shows a quick preview — just **10 items** from each category — 
 
 When you tap on the **“See All”** button in any section:
 - You’re taken to a full-screen list of **all movies/TV shows** in that category.
-- The **App Bar title** changes based on what you tap.
+- The **App Bar title** changes depending on which item you tap.
 
 For example:
 - If you clicked from "Trending Movies", the AppBar will show: **"All Trending Movies"**
@@ -40,7 +40,7 @@ For example:
 
 Want to learn more about a movie or show? Just tap on it!
 
-You’ll be taken to the **Details Screen**, which includes:
+You’ll be navigated to the **Details Screen**, which includes:
 - 🎬 Poster and Banner Images
 - 🏷️ Title
 - ⭐ Rating
@@ -63,10 +63,29 @@ You’ll be taken to the **Details Screen**, which includes:
    ```bash
    git clone https://github.com/shubhnesh/Movie_App.git
 
+2. **Install Dependencies**
+   ```bash
+   pub get
+
+3. **Run the App**
+   ```bash
+   flutter run
+
+4. **Check if the device is recognized:**
+   ```bash
+   flutter devices
 
  ### Screenshots
  -
     <p align="center">
-      <img src="https://github.com/shubhnesh/Task-Pragati/blob/main/Screenshots/light_mode.jpg" width="250" style="margin-right: 20px">
-      <img src="https://github.com/shubhnesh/Task-Pragati/blob/main/Screenshots/dark_mode.jpg" width="250">
+      <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/Home_page_1.jpg" width="250"">
+      <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/Home_page_2.jpg" width="250">
+       <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/All_trending_movies.jpg" width="250">
+    </p>
+    
+
+    <p align="center">
+      <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/All_top_rated_movies.jpg" width="250"">
+      <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/All_popular_tv_shows.jpg" width="250">
+       <img src="https://github.com/shubhnesh/Movie_App/blob/main/Screenshots/Details_screen.jpg" width="250">
     </p>
