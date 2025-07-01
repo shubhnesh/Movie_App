@@ -5,7 +5,7 @@ It is a clean and simple Flutter application that lets you browse movies and TV 
 This app is designed to give users a smooth and engaging experience while exploring:
 - Trending Movies
 - Top-Rated Movies
-- Popular TV Shows
+- Popular TV Shows 
 
 ---
 
