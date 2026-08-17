@@ -11,19 +11,19 @@ pipeline{
 
     stage('Flutter Doctor') {
       steps{
-        sh flutter doctor
+        sh 'flutter doctor'
       }
     }
 
     stage('Get Packages') {
       steps{
-        sh flutter pub get
+        sh 'flutter pub get'
       }
     }
 
     stage('Analyze') {
       steps{
-        sh flutter analyze
+        sh 'flutter analyze'
       }
     }
 
