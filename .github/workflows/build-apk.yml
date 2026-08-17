@@ -10,10 +10,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: flutter_app
-
     steps:
       
       # 1. Check out the repository code
@@ -54,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       # 10. Send APK via Gmail
       - name: Send APK via Email
@@ -94,7 +90,7 @@ jobs:
             Commit: ${{ github.sha }}
 
             # Optional attachments:
-            attachments: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+            attachments: build/app/outputs/flutter-apk/app-release.apk
 
         
 
