@@ -1,13 +1,9 @@
 pipeline{
   agent any
 
-  environment{
-    PROJECT_DIR = "flutter_app"
-  }
-
   stages{
     
-    stage('checkout') {
+    stage('Checkout') {
       steps{
         checkout scm
       }
@@ -15,28 +11,19 @@ pipeline{
 
     stage('Flutter Doctor') {
       steps{
-        sh '''
-        cd $PROJECT_DIR
-        flutter doctor
-        '''
+        sh flutter doctor
       }
     }
 
     stage('Get Packages') {
       steps{
-        sh '''
-        cd $PROJECT_DIR
-        flutter pub get
-        '''
+        sh flutter pub get
       }
     }
 
     stage('Analyze') {
       steps{
-        sh '''
-        cd $PROJECT_DIR
-        flutter analyze
-        '''
+        sh flutter analyze
       }
     }
 
