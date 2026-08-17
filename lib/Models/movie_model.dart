@@ -30,4 +30,7 @@ class Movie implements DetailsModel {
 
   @override
   String get releaseDate => release;
+
+  @override
+  String get title => title;
 }
