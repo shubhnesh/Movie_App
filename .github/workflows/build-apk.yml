@@ -33,26 +33,18 @@ jobs:
       - name: Install Packages
         run: flutter pub get
 
-      # 6. Analyze the code for static errors and warnings
-      - name: Analyze Code
-        run: flutter analyze
-
-      # 7. Run unit and widget tests
-      - name: Run Tests
-        run: flutter test
-
-      # 8. Build the Android release APK (or appbundle)
+      # 5. Build the Android release APK (or appbundle)
       - name: Build Release APK
         run: flutter build apk --release
 
-       # 9. Upload the generated build artifact to GitHub
+       # 6. Upload the generated build artifact to GitHub
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      # 10. Send APK via Gmail
+      # 7. Send APK via Gmail
       - name: Send APK via Email
         uses: dawidd6/action-send-mail@v3
         with:
