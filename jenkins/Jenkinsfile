@@ -1,1 +1,60 @@
+pipeline{
+  agent any
 
+  environment{
+    PROJECT_DIR = "flutter_app"
+  }
+
+  stages{
+    
+    stage('checkout') {
+      steps{
+        checkout scm
+      }
+    }
+
+    stage('Flutter Doctor') {
+      steps{
+        sh '''
+        cd $PROJECT_DIR
+        flutter doctor
+        '''
+      }
+    }
+
+    stage('Get Packages') {
+      steps{
+        sh '''
+        cd $PROJECT_DIR
+        flutter pub get
+        '''
+      }
+    }
+
+    stage('Analyze') {
+      steps{
+        sh '''
+        cd $PROJECT_DIR
+        flutter analyze
+        '''
+      }
+    }
+
+    stage('Trigger APK Build') {
+      steps{
+        echo "GitHub Actions will build APK" 
+      }
+    }
+    
+  }
+
+  post{
+    success{
+      echo "Pipeline Passed"
+    }
+
+    failure{
+      echo "Pipeline Failed"
+    }
+  }
+}
