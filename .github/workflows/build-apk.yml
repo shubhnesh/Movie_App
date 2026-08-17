@@ -29,7 +29,7 @@ jobs:
 
       # 3. Set up the Flutter environment
       - name: Setup Flutter
-        uses: subsito/flutter-action@v4
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.35.3'
 
@@ -55,6 +55,47 @@ jobs:
         with:
           name: release-apk
           path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+
+      # 10. Send APK via Gmail
+      - name: Send APK via Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Specify connection via URL (replaces server_address, server_port, secure,
+          # username and password)
+          
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+
+          # Server port, default 25:
+          server_port: 465
+
+          # Optional: whether this connection uses TLS (default is true if server_port is 465)
+          secure: true
+
+          # Optional (recommended) mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+
+          # Optional (recommended) mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+
+          # Required mail subject:
+          subject: "APK Build #${{github.run_number}}"
+
+          # Optional recipients. Separate multiple addresses by a comma (possibly surrounded by whitespace):
+          to: shubhneshkashyap92@gmail.com
+          from: GitHub CI
+
+          # Optional plain body:
+          body: |
+            Your Flutter APK has been built successfully.
+
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+
+            # Optional attachments:
+            attachments: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+
         
 
 
