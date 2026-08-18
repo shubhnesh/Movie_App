@@ -33,9 +33,6 @@ jobs:
       - name: Install Packages
         run: flutter pub get
 
-      # - name: Run Tests
-      #   run: flutter test
-
       # 5. Build the Android release APK (or appbundle)
       - name: Build Release APK
         run: flutter build apk --release
@@ -46,6 +43,7 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
 
       # 7. Get Artifact URL
       - name: Get Artifact URL
@@ -130,16 +128,4 @@ jobs:
 
               </body>
             </html>
-
-          # Optional attachments:
-          # attachments: build/app/outputs/flutter-apk/app-release.apk
-
-        
-
-
-
-
-
-
-        
-        
+  
