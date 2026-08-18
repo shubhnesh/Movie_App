@@ -47,7 +47,25 @@ jobs:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      # 7. Send APK via Gmail
+      # 7. Get Artifact URL
+      - name: Get Artifact URL
+        id: artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ARTIFACT_ID=$(gh api \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts \
+            --jq '.artifacts[] | select(.name=="release-apk") | .id' \
+            | head -n 1)
+
+          ARTIFACT_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${ARTIFACT_ID}"
+
+          echo "Artifact ID: $ARTIFACT_ID"
+          echo "Artifact URL: $ARTIFACT_URL"
+
+          echo "artifact_url=$ARTIFACT_URL" >> "$GITHUB_OUTPUT"
+
+      # 8. Send APK via Gmail
       - name: Send APK via Email
         uses: dawidd6/action-send-mail@v3
         with:
@@ -73,19 +91,48 @@ jobs:
           subject: "APK Build #${{github.run_number}}"
 
           # Optional recipients. Separate multiple addresses by a comma (possibly surrounded by whitespace):
-          to: shubhneshkashyap92@gmail.com
+          to: shubhneshkashyap92@gmail.com, siddhantbisht440@gmail.com
           from: GitHub CI
 
           # Optional plain body:
-          body: |
-            Your Flutter APK has been built successfully.
+          html_body: |
+            <html>
+              <body>
 
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
+                <h2>🚀 Flutter APK Build Successful</h2>
+
+                <p>
+                  Your Flutter APK has been built successfully.
+                </p>
+
+                <p>
+                  <strong>Repository:</strong>
+                  ${{ github.repository }}
+                  <br>
+
+                  <strong>Branch:</strong>
+                  ${{ github.ref_name }}
+                  <br>
+
+                  <strong>Build:</strong>
+                  #${{ github.run_number }}
+                  <br>
+
+                  <strong>Commit:</strong>
+                  ${{ github.sha }}
+                </p>
+
+                <p>
+                  <a href="${{ steps.artifact.outputs.artifact_url }}">
+                    📱 Download APK
+                  </a>
+                </p>
+
+              </body>
+            </html>
 
           # Optional attachments:
-          attachments: build/app/outputs/flutter-apk/app-release.apk
+          # attachments: build/app/outputs/flutter-apk/app-release.apk
 
         
 
