@@ -84,8 +84,8 @@ jobs:
             Branch: ${{ github.ref_name }}
             Commit: ${{ github.sha }}
 
-            # Optional attachments:
-            attachments: build/app/outputs/flutter-apk/app-release.apk
+          # Optional attachments:
+          attachments: build/app/outputs/flutter-apk/app-release.apk
 
         
 
